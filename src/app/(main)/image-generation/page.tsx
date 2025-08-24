@@ -1,4 +1,5 @@
 import Configuration from "@/components/image-generation/configs";
+import GeneratedImages from "@/components/image-generation/generated-images";
 import React from "react";
 
 const ImageGeneration = () => {
@@ -8,8 +9,8 @@ const ImageGeneration = () => {
         <Configuration />
       </div>
 
-      <div className="md:col-span-2 p-4 rounded-xl flex items-center justify-center bg-gray-50 shadow-sm">
-        <span className="text-gray-500">Output</span>
+      <div className="md:col-span-2 p-4 h-fit rounded-xl flex items-center justify-center shadow-sm">
+        <GeneratedImages />
       </div>
     </section>
   );
