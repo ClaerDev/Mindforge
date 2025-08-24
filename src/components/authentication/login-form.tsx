@@ -48,7 +48,6 @@ const LoginForm = ({ className }: { className?: string }) => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     toast.loading(" Logging In...", { id: toastId });
     setLoading(true);
-    console.log(values);
 
     const formData = new FormData();
     formData.append("email", values.email);

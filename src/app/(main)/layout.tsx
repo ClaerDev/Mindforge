@@ -1,5 +1,9 @@
 import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 
 export default function DashboardLayout({
   children,
@@ -11,7 +15,7 @@ export default function DashboardLayout({
       <AppSidebar />
       <SidebarInset>
         <div>
-            <SidebarTrigger className="-ml-1"/>
+          <SidebarTrigger className="-ml-1" />
         </div>
         <main className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</main>{" "}
       </SidebarInset>
