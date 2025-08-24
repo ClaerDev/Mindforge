@@ -24,7 +24,6 @@ export async function signup(formData: FormData): Promise<AuthResponse> {
     email,
     password,
     options: {
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/login`,
       data: {
         fullName: typeof fullName === "string" ? fullName : undefined,
       },
