@@ -38,7 +38,7 @@ const GeneratedImages = () => {
     return (
       <Card className="w-full max-w-2xl bg-muted">
         <CardContent className="flex aspect-square items-center  justify-center p-6">
-          <span className="text-2xl ">No images generated</span>
+          <span className="text-2xl ">No images generated yet...</span>
         </CardContent>
       </Card>
     );
