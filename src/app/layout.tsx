@@ -16,7 +16,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Pictoria AI",
+  title: "Visionary AI",
   description: "An AI-Image generator Sass and model generator",
   icons: {
     icon: "/favv.png",

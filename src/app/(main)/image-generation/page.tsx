@@ -16,7 +16,7 @@ const ImageGeneration = async ({
   const { data: userModels } = await fetchModels();
 
   return (
-    <section className="container mx-auto grid gap-4 md:grid-cols-3">
+    <section className="container mx-auto grid gap-4 md:grid-cols-3 pl-14">
       <div className="md:col-span-1">
         <Configuration userModels={userModels || []} model_id={model_id} />
       </div>

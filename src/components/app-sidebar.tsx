@@ -37,7 +37,7 @@ export async function AppSidebar({
           </div>
           <Link href={"/"}>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-bold">Pictoria AI</span>
+              <span className="truncate font-bold">Visionary AI</span>
               <span className="truncate text-xs">Pro</span>
             </div>
           </Link>
