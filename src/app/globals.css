@@ -3,13 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @media (min-width:1536px) {
   .container{
   max-width: 1400px;
 }
 }
-
 
 @layer base {
   :root {
@@ -146,9 +144,10 @@
     --sidebar-border: 240 3.7% 15.9%;
 
     --sidebar-ring: 217.2 91.2% 59.8%}
+  .theme {
+    --animate-gradient: gradient 8s linear infinite;
+  }
 }
-
-
 
 @layer base {
   * {
@@ -157,4 +156,25 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@theme inline {
+  @keyframes gradient {
+  to {
+    background-position: var(--bg-size, 300%) 0;
+    }
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-\[shimmer_2s_infinite\] {
+  animation: shimmer 2s infinite linear;
 }
