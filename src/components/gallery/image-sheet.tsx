@@ -77,10 +77,7 @@ const ImaegSheet = ({ image, onClose }: ImageSheetProps) => {
         <div>
           <p className="text-xl font-semibold text-primary mb-2">
             Prompt{" "}
-            <span className="text-xs text-gray-600">
-              {" "}
-              (Scroll Down for more)
-            </span>
+          
           </p>
           <ScrollArea className="h-32 rounded-md border border-primary/20 p-3 bg-muted/30">
             <p className="text-lg text-primary/80 whitespace-pre-wrap">
