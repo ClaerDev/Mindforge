@@ -68,7 +68,7 @@ const ImaegSheet = ({ image, onClose }: ImageSheetProps) => {
             imageId={image.id.toString()}
             onDelete={onClose}
             className="w-fit"
-            imageName={image.image_name}
+            imageName={image.image_name ?? ""}
           />
         </div>
 
@@ -94,9 +94,12 @@ const ImaegSheet = ({ image, onClose }: ImageSheetProps) => {
         <div className="flex flex-wrap gap-3">
           <Badge
             variant="secondary"
-            className="rounded-full hover:bg-gray-300 px-4 py-2 text-sm font-medium bg-primary/10 text-primary"
+            className="rounded-full hover:bg-gray-300 px-4 py-2 text-sm font-medium bg-primary/10 text-primary max-w-[80%]"
           >
-            <span className="font-semibold mr-1">Model:</span> {image.model}
+            <span className="font-semibold mr-1">Model:</span>{" "}
+            {image.model?.startsWith("priyansh-narang2308/")
+              ? image.model.split("/")[1].split(":")[0]
+              : image.model}
           </Badge>
           <Badge
             variant="secondary"

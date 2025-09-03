@@ -91,6 +91,9 @@ const ModelTrainingForm = () => {
       formDatta.append("modelName", values.modelName);
       formDatta.append("gender", values.gender);
 
+            toast.loading("Model Training Initialized...", { id: toastId });
+
+
       // use the /train route
 
       const responseForTraining = await fetch("/api/training", {

@@ -1,6 +1,10 @@
+import { fetchModels } from "@/app/actions/model-actions";
+import ModelsList from "@/components/models/models-list";
 import React from "react";
 
-const Models = () => {
+const Models = async () => {
+  const data = await fetchModels();
+
   return (
     <section className="container mx-auto pl-12">
       <div>
@@ -9,6 +13,7 @@ const Models = () => {
           View and manage your trained models
         </p>
       </div>
+      <ModelsList models={data}/>
     </section>
   );
 };

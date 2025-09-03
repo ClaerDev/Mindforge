@@ -3,10 +3,10 @@
 import {
   LayoutDashboard,
   ImageIcon,
-  Frame,
   Layers,
   CreditCard,
   Settings2,
+  Box,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -32,7 +32,7 @@ const navItems = [
   {
     title: "My Models",
     url: "/models",
-    icon: Frame,
+    icon: Box,
   },
 
   {

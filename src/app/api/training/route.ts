@@ -8,7 +8,7 @@ const replicate = new Replicate({
 });
 
 const WEBHOOK_URL =
-  process.env.SITE_URL ?? "https://d536588625c7.ngrok-free.app";
+  process.env.SITE_URL ?? "https://c9e0430e61bd.ngrok-free.app";
 
 export async function POST(request: NextRequest) {
   try {
@@ -82,8 +82,12 @@ export async function POST(request: NextRequest) {
           input_images: fileUrl.signedUrl, //jo signed url key aaya tha use that here
           trigger_word: "ohwx",
         },
-        webhook: `${WEBHOOK_URL}/api/webhooks/training`,
-        webhook_events_filter: ["completed"],
+        webhook: `${WEBHOOK_URL}/api/webhooks/training?userId=${
+          user.id
+        }&modelName=${encodeURIComponent(
+          input.modelName
+        )}&fileName=${encodeURIComponent(fileName)}`,
+webhook_events_filter: ["start", "completed"],
       }
     );
 
@@ -94,7 +98,7 @@ export async function POST(request: NextRequest) {
       model_name: input.modelName,
       gender: input.gender,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      training_status: training.status as any, 
+      training_status: training.status as any,
       trigger_word: "ohwx",
       training_steps: 1200,
       training_id: training.id,
