@@ -8,8 +8,8 @@ import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import Link from "next/link";
 
-const AuthForm = () => {
-  const [mode, setMode] = useState("login");
+const AuthForm = ({ state }: { state: string }) => {
+  const [mode, setMode] = useState(state);
   const [agreed, setAgreed] = useState(false);
 
   return (
