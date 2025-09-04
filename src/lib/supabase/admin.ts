@@ -1,14 +1,12 @@
 import { createClient } from "@supabase/supabase-js";
 
-import Stripe from 'stripe';
-import type {  Tables, TablesInsert } from '@database.types';
+import Stripe from "stripe";
+import type { Tables, TablesInsert } from "@database.types";
 import { toDateTime } from "../helper";
 import { stripe } from "../stripe/config";
 
-type Product = Tables<'products'>;
-type Price = Tables<'prices'>;
-
-const TRIAL_PERIOD_DAYS = 0;
+type Product = Tables<"products">;
+type Price = Tables<"prices">;
 
 export const supabaseAdmin = createClient(
   process.env.SUPABASE_URL!,
@@ -22,11 +20,11 @@ const upsertProductRecord = async (product: Stripe.Product) => {
     name: product.name,
     description: product.description ?? null,
     image: product.images?.[0] ?? null,
-    metadata: product.metadata
+    metadata: product.metadata,
   };
 
   const { error: upsertError } = await supabaseAdmin
-    .from('products')
+    .from("products")
     .upsert([productData]);
   if (upsertError)
     throw new Error(`Product insert/update failed: ${upsertError.message}`);
@@ -41,21 +39,23 @@ const upsertPriceRecord = async (
 ) => {
   const priceData: Price = {
     id: price.id,
-    product_id: typeof price.product === 'string' ? price.product : '',
-    active: price.active,
-    currency: price.currency,
-    type: price.type,
+    product_id: typeof price.product === "string" ? price.product : null,
+    active: price.active ?? null,
+    currency: price.currency ?? null,
+    description: price.nickname ?? null,
+    metadata: price.metadata ?? {},
+    type: price.type ?? null,
     unit_amount: price.unit_amount ?? null,
     interval: price.recurring?.interval ?? null,
     interval_count: price.recurring?.interval_count ?? null,
-    trial_period_days: price.recurring?.trial_period_days ?? TRIAL_PERIOD_DAYS
+    trial_period_days: price.recurring?.trial_period_days ?? null,
   };
 
   const { error: upsertError } = await supabaseAdmin
-    .from('prices')
+    .from("prices")
     .upsert([priceData]);
 
-  if (upsertError?.message.includes('foreign key constraint')) {
+  if (upsertError?.message.includes("foreign key constraint")) {
     if (retryCount < maxRetries) {
       console.log(`Retry attempt ${retryCount + 1} for price ID: ${price.id}`);
       await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -75,9 +75,9 @@ const upsertPriceRecord = async (
 
 const deleteProductRecord = async (product: Stripe.Product) => {
   const { error: deletionError } = await supabaseAdmin
-    .from('products')
+    .from("products")
     .delete()
-    .eq('id', product.id);
+    .eq("id", product.id);
   if (deletionError)
     throw new Error(`Product deletion failed: ${deletionError.message}`);
   console.log(`Product deleted: ${product.id}`);
@@ -85,20 +85,23 @@ const deleteProductRecord = async (product: Stripe.Product) => {
 
 const deletePriceRecord = async (price: Stripe.Price) => {
   const { error: deletionError } = await supabaseAdmin
-    .from('prices')
+    .from("prices")
     .delete()
-    .eq('id', price.id);
-  if (deletionError) throw new Error(`Price deletion failed: ${deletionError.message}`);
+    .eq("id", price.id);
+  if (deletionError)
+    throw new Error(`Price deletion failed: ${deletionError.message}`);
   console.log(`Price deleted: ${price.id}`);
 };
 
 const upsertCustomerToSupabase = async (uuid: string, customerId: string) => {
   const { error: upsertError } = await supabaseAdmin
-    .from('customers')
+    .from("customers")
     .upsert([{ id: uuid, stripe_customer_id: customerId }]);
 
   if (upsertError)
-    throw new Error(`Supabase customer record creation failed: ${upsertError.message}`);
+    throw new Error(
+      `Supabase customer record creation failed: ${upsertError.message}`
+    );
 
   return customerId;
 };
@@ -106,14 +109,14 @@ const upsertCustomerToSupabase = async (uuid: string, customerId: string) => {
 const createCustomerInStripe = async (uuid: string, email: string) => {
   const customerData = { metadata: { supabaseUUID: uuid }, email: email };
   const newCustomer = await stripe.customers.create(customerData);
-  if (!newCustomer) throw new Error('Stripe customer creation failed.');
+  if (!newCustomer) throw new Error("Stripe customer creation failed.");
 
   return newCustomer.id;
 };
 
 const createOrRetrieveCustomer = async ({
   email,
-  uuid
+  uuid,
 }: {
   email: string;
   uuid: string;
@@ -121,9 +124,9 @@ const createOrRetrieveCustomer = async ({
   // Check if the customer already exists in Supabase
   const { data: existingSupabaseCustomer, error: queryError } =
     await supabaseAdmin
-      .from('customers')
-      .select('*')
-      .eq('id', uuid)
+      .from("customers")
+      .select("*")
+      .eq("id", uuid)
       .maybeSingle();
 
   if (queryError) {
@@ -148,15 +151,15 @@ const createOrRetrieveCustomer = async ({
   const stripeIdToInsert = stripeCustomerId
     ? stripeCustomerId
     : await createCustomerInStripe(uuid, email);
-  if (!stripeIdToInsert) throw new Error('Stripe customer creation failed.');
+  if (!stripeIdToInsert) throw new Error("Stripe customer creation failed.");
 
   if (existingSupabaseCustomer && stripeCustomerId) {
     // If Supabase has a record but doesn't match Stripe, update Supabase record
     if (existingSupabaseCustomer.stripe_customer_id !== stripeCustomerId) {
       const { error: updateError } = await supabaseAdmin
-        .from('customers')
+        .from("customers")
         .update({ stripe_customer_id: stripeCustomerId })
-        .eq('id', uuid);
+        .eq("id", uuid);
 
       if (updateError)
         throw new Error(
@@ -179,7 +182,7 @@ const createOrRetrieveCustomer = async ({
       stripeIdToInsert
     );
     if (!upsertedStripeCustomer)
-      throw new Error('Supabase customer record creation failed.');
+      throw new Error("Supabase customer record creation failed.");
 
     return upsertedStripeCustomer;
   }
@@ -196,16 +199,29 @@ const copyBillingDetailsToCustomer = async (
   const customer = payment_method.customer as string;
   const { name, phone, address } = payment_method.billing_details;
   if (!name || !phone || !address) return;
-  //@ts-ignore
+  // @ts-expect-error Stripe type assertion for customer update
   await stripe.customers.update(customer, { name, phone, address });
   const { error: updateError } = await supabaseAdmin
-    .from('users')
+    .from("users")
     .update({
       billing_address: { ...address },
-      payment_method: { ...payment_method[payment_method.type] }
+      payment_method: { ...payment_method[payment_method.type] },
     })
-    .eq('id', uuid);
-  if (updateError) throw new Error(`Customer update failed: ${updateError.message}`);
+    .eq("id", uuid);
+  if (updateError)
+    throw new Error(`Customer update failed: ${updateError.message}`);
+};
+
+const safeToISOString = (value: unknown): string | undefined => {
+  const date = toDateTime(value as number);
+  return date instanceof Date && !isNaN(date.getTime())
+    ? date.toISOString()
+    : undefined;
+};
+
+const getValidISOString = (value: unknown): string => {
+  const iso = safeToISOString(value);
+  return iso ?? new Date().toISOString();
 };
 
 const manageSubscriptionStatusChange = async (
@@ -215,9 +231,9 @@ const manageSubscriptionStatusChange = async (
 ) => {
   // Get customer's UUID from mapping table.
   const { data: customerData, error: noCustomerError } = await supabaseAdmin
-    .from('customers')
-    .select('id')
-    .eq('stripe_customer_id', customerId)
+    .from("customers")
+    .select("id")
+    .eq("stripe_customer_id", customerId)
     .single();
 
   if (noCustomerError)
@@ -225,49 +241,38 @@ const manageSubscriptionStatusChange = async (
 
   const { id: uuid } = customerData!;
 
-  const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
-    expand: ['default_payment_method']
-  });
-  // Upsert the latest status of the subscription object.
-  const subscriptionData: TablesInsert<'subscriptions'> = {
+  const subscription = (await stripe.subscriptions.retrieve(subscriptionId, {
+    expand: ["default_payment_method"],
+  })) as Stripe.Subscription;
+  const subscriptionData: TablesInsert<"subscriptions"> = {
     id: subscription.id,
     user_id: uuid,
     metadata: subscription.metadata,
+    // @ts-expect-error Stripe status may include 'paused', which is not in Supabase type
     status: subscription.status,
     price_id: subscription.items.data[0].price.id,
-    //TODO check quantity on subscription
-    // @ts-ignore
+    // @ts-expect-error Stripe quantity type mismatch with Supabase
     quantity: subscription.quantity,
     cancel_at_period_end: subscription.cancel_at_period_end,
-    cancel_at: subscription.cancel_at
-      ? toDateTime(subscription.cancel_at).toISOString()
-      : null,
-    canceled_at: subscription.canceled_at
-      ? toDateTime(subscription.canceled_at).toISOString()
-      : null,
-    current_period_start: toDateTime(
-      subscription.current_period_start
-    ).toISOString(),
-    current_period_end: toDateTime(
-      subscription.current_period_end
-    ).toISOString(),
-    created: toDateTime(subscription.created).toISOString(),
-    ended_at: subscription.ended_at
-      ? toDateTime(subscription.ended_at).toISOString()
-      : null,
-    trial_start: subscription.trial_start
-      ? toDateTime(subscription.trial_start).toISOString()
-      : null,
-    trial_end: subscription.trial_end
-      ? toDateTime(subscription.trial_end).toISOString()
-      : null
+    cancel_at: safeToISOString(subscription.cancel_at),
+    canceled_at: safeToISOString(subscription.canceled_at),
+    // @ts-expect-error Stripe API type may not include these fields, but they exist in the payload
+    current_period_start: getValidISOString(subscription.current_period_start),
+    // @ts-expect-error Stripe API type may not include these fields, but they exist in the payload
+    current_period_end: getValidISOString(subscription.current_period_end),
+    created: safeToISOString(subscription.created),
+    ended_at: safeToISOString(subscription.ended_at),
+    trial_start: safeToISOString(subscription.trial_start),
+    trial_end: safeToISOString(subscription.trial_end),
   };
 
   const { error: upsertError } = await supabaseAdmin
-    .from('subscriptions')
+    .from("subscriptions")
     .upsert([subscriptionData]);
   if (upsertError)
-    throw new Error(`Subscription insert/update failed: ${upsertError.message}`);
+    throw new Error(
+      `Subscription insert/update failed: ${upsertError.message}`
+    );
   console.log(
     `Inserted/updated subscription [${subscription.id}] for user [${uuid}]`
   );
@@ -275,7 +280,6 @@ const manageSubscriptionStatusChange = async (
   // For a new subscription copy the billing details to the customer object.
   // NOTE: This is a costly operation and should happen at the very end.
   if (createAction && subscription.default_payment_method && uuid)
-    //@ts-ignore
     await copyBillingDetailsToCustomer(
       uuid,
       subscription.default_payment_method as Stripe.PaymentMethod
@@ -288,5 +292,5 @@ export {
   deleteProductRecord,
   deletePriceRecord,
   createOrRetrieveCustomer,
-  manageSubscriptionStatusChange
+  manageSubscriptionStatusChange,
 };

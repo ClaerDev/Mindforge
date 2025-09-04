@@ -49,10 +49,19 @@ export async function checkoutWithStripe(
     }
 
     let params: Stripe.Checkout.SessionCreateParams = {
-        // NOTE:FROM DOCS
+      // NOTE:FROM DOCS
       allow_promotion_codes: true,
       billing_address_collection: "required",
       customer, //id of customer
+      client_reference_id: user?.id,
+      metadata: {
+        image_generation_count:
+          (price?.metadata as { image_generation_count?: number })
+            ?.image_generation_count ?? 0,
+        model_training_count:
+          (price?.metadata as { model_training_count?: number })
+            ?.model_training_count ?? 0,
+      },
       customer_update: {
         address: "auto",
       },

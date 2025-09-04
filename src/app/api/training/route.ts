@@ -8,7 +8,7 @@ const replicate = new Replicate({
 });
 
 const WEBHOOK_URL =
-  process.env.SITE_URL ?? "https://c2dd6e7799d5.ngrok-free.app";
+  process.env.SITE_URL ?? " https://2118d30863c1.ngrok-free.app";
 
 export async function POST(request: NextRequest) {
   try {
