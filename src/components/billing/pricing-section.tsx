@@ -33,7 +33,10 @@ interface PricingProps {
   subscription: SubscriptionWithProduct | null;
   user: User | null;
   products: ProductWithPrices[] | null;
-  mostPopularProd: string;
+  mostPopularProd?: string;
+  showInterval?: boolean;
+  className?: string;
+  activeProduct?: string;
 }
 
 const renderPricingButton = ({
@@ -76,7 +79,10 @@ const Pricing = ({
   subscription,
   user,
   products,
-  mostPopularProd = "pro",
+  mostPopularProd = "",
+  showInterval = true,
+  className,
+  activeProduct=""
 }: PricingProps) => {
   const [billingInterval, setBillingInterval] = useState("month");
 
@@ -120,24 +126,26 @@ const Pricing = ({
   };
 
   return (
-    <section className="w-full">
-      <div className="flex justify-center items-center space-x-4 mb-8">
-        <Label htmlFor="pricing-switch" className="font-semibold text-sm">
-          Monthly
-        </Label>
-        <Switch
-          id="pricing-switch"
-          checked={billingInterval === "year"}
-          onCheckedChange={(checked) =>
-            setBillingInterval(checked ? "year" : "month")
-          }
-        />
-        <Label htmlFor="pricing-switch" className="font-semibold text-sm">
-          Yearly
-        </Label>
-      </div>
+    <section className={cn("w-full", className)}>
+      {showInterval && (
+        <div className="flex justify-center items-center space-x-4 mb-8">
+          <Label htmlFor="pricing-switch" className="font-semibold text-sm">
+            Monthly
+          </Label>
+          <Switch
+            id="pricing-switch"
+            checked={billingInterval === "year"}
+            onCheckedChange={(checked) =>
+              setBillingInterval(checked ? "year" : "month")
+            }
+          />
+          <Label htmlFor="pricing-switch" className="font-semibold text-sm">
+            Yearly
+          </Label>
+        </div>
+      )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 w-full mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 space-y-0 gap-4 sm:gap-6 w-full mx-auto">
         {products.map((product) => {
           const price = product?.prices.find(
             (price) => price.interval === billingInterval
@@ -151,7 +159,7 @@ const Pricing = ({
           }).format((price?.unit_amount || 0) / 100);
 
           const isPopular =
-            product.name?.toLowerCase() === mostPopularProd.toLowerCase();
+            product.name?.toLowerCase() === activeProduct.toLowerCase();
 
           return (
             <div
@@ -164,7 +172,15 @@ const Pricing = ({
                   : "border-border"
               )}
             >
-              {isPopular && (
+
+               {            product.name?.toLowerCase() === activeProduct.toLowerCase() && (
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-primary shadow-md">
+                    Selected
+                  </span>
+                </div>
+              )}
+              {            product.name?.toLowerCase() === mostPopularProd.toLowerCase() && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-primary shadow-md">
                     Most Popular

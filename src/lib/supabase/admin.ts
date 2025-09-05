@@ -1,12 +1,14 @@
 import { createClient } from "@supabase/supabase-js";
 
 import Stripe from "stripe";
-import type { Tables, TablesInsert } from "@database.types";
+import type { Json, Tables, TablesInsert } from "@database.types";
 import { toDateTime } from "../helper";
 import { stripe } from "../stripe/config";
 
 type Product = Tables<"products">;
 type Price = Tables<"prices">;
+
+const TRIAL_PERIOD_DAYS = 0;
 
 export const supabaseAdmin = createClient(
   process.env.SUPABASE_URL!,
@@ -48,7 +50,7 @@ const upsertPriceRecord = async (
     unit_amount: price.unit_amount ?? null,
     interval: price.recurring?.interval ?? null,
     interval_count: price.recurring?.interval_count ?? null,
-    trial_period_days: price.recurring?.trial_period_days ?? null,
+    trial_period_days: price.recurring?.trial_period_days ?? TRIAL_PERIOD_DAYS,
   };
 
   const { error: upsertError } = await supabaseAdmin
@@ -286,8 +288,36 @@ const manageSubscriptionStatusChange = async (
     );
 };
 
+const updateUserCredits = async (userId: string, metadata: Json) => {
+  const creditsData: TablesInsert<"credits"> = {
+    user_id: userId,
+    image_generation_count:
+      (metadata as { image_generation_count?: number })
+        .image_generation_count ?? 0,
+    model_training_count:
+      (metadata as { model_training_count?: number }).model_training_count ?? 0,
+    max_image_generation_count:
+      (metadata as { image_generation_count?: number })
+        .image_generation_count ?? 0,
+    max_model_training_count:
+      (metadata as { model_training_count?: number })
+        .model_training_count ?? 0,
+  };
+
+  const { error: upsertError } = await supabaseAdmin
+    .from("credits")
+    .upsert(creditsData)
+    .eq("user_id", userId);
+
+  if (upsertError) {
+    throw new Error(`Credits update Failed: ${upsertError.message}`);
+  }
+
+  console.log("Updated credits of the user: ", userId);
+};
 export {
   upsertProductRecord,
+  updateUserCredits,
   upsertPriceRecord,
   deleteProductRecord,
   deletePriceRecord,

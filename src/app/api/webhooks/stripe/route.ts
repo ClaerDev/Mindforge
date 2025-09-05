@@ -7,6 +7,7 @@ import {
   manageSubscriptionStatusChange,
   deleteProductRecord,
   deletePriceRecord,
+  updateUserCredits,
 } from "@/lib/supabase/admin";
 
 // Extend the Stripe.Invoice type to include the subscription property
@@ -90,6 +91,17 @@ export async function POST(req: Request) {
               checkoutSession.customer as string,
               true // creation
             );
+
+            //IDEA:update the.credits here
+            if (
+              checkoutSession?.status === "complete" &&
+              checkoutSession?.payment_status === "paid"
+            ) {
+              await updateUserCredits(
+                checkoutSession?.client_reference_id as string,
+                checkoutSession.metadata
+              );
+            }
           }
           break;
         }
