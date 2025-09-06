@@ -66,3 +66,34 @@ export async function logout(): Promise<void> {
 
   redirect("/login");
 }
+
+export async function updateProfile(values: {
+  fullName: string;
+}): Promise<AuthResponse> {
+  const supabase = await createClient();
+
+  const { data: profileUpdatedData, error } = await supabase.auth.updateUser({
+    data: { fullName: values.fullName },
+  });
+
+  return {
+    error: error?.message || "There was an error updating profile",
+    success: !error,
+    data: profileUpdatedData || null,
+  };
+}
+
+export async function resetPassword(values: {
+  email: string;
+}): Promise<AuthResponse> {
+  const supabase = await createClient();
+
+  const { data: resetPassword, error } =
+    await supabase.auth.resetPasswordForEmail(values.email);
+
+  return {
+    error: error?.message || "There was an error resetting your password!",
+    success: !error,
+    data: resetPassword || null,
+  };
+}

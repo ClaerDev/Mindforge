@@ -1,32 +1,3 @@
-## Useful Links
-
-- To train Flux Dev LORA model: https://replicate.com/ostris/flux-dev-lora-trainer/train
-- Flux Dev Model: https://replicate.com/black-forest-labs/flux-dev
-- Flux Schnell Model: https://replicate.com/black-forest-labs/flux-schnell
-- For stock images: https://www.lummi.ai/
-
-## Auth Page Quote
-
-Visionary AI is a game changer for me. I have been able to generate high quality professional headshots within minutes. It has saved me countless hours of work and cost as well.”
-
-David S.
-
-## Model Training Note
-Training Data (Zip File) | Read the requirements below
-• Provide 10, 12 or 15 images in total
-• Ideal breakdown for 12 images:
-- 6 face closeups
-- 3/4 half body closeups (till stomach)
-- 2/3 full body shots
-• No accessories on face/head ideally
-• No other people in images
-• Different expressions, clothing, backgrounds with good lighting
-• Images to be in 1:1 resolution (1048x1048 or higher)
-• Use images of similar age group (ideally within past few months)
-• Provide only zip file (under 45MB size)
-
-
-# Landing Paeg
 
 ## Hero Section
 
@@ -168,45 +139,6 @@ const reviews = [
   },
 ];
 ```
-
-## Pricing Plans  
-
-### Find the Perfect Plan for Your Needs  
-Select a plan that offers the right balance of features, flexibility, and support—whether you’re exploring creativity, scaling professional projects, or driving business growth.  
-
----
-
-## **Hobby**  
-Essentials to begin your AI image creation journey—ideal for exploring and experimenting with creativity.  
-
-- 1 trained model  
-- 100 images per month  
-- Basic analytics  
-- Community support  
-- Access to creative resources  
-
----
-
-## **Pro**  
-Designed for artists and professionals who want to elevate their creative work with more power and flexibility.  
-
-- 2 trained models  
-- 300 images per month  
-- Advanced analytics  
-- Priority support  
-- Collaboration tools  
-
----
-
-## **Enterprise**  
-Tailored for businesses and advanced creators who need scalability, reliability, and dedicated support.  
-
-- 5 trained models  
-- Unlimited images  
-- In-depth analytics  
-- Dedicated 1-hour support response time  
-- Custom integrations  
-  
 
 ## FAQ Section
 
