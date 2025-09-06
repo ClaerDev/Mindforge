@@ -63,35 +63,31 @@ const MarqueeColumn = ({
       reverse={reverse}
       pauseOnHover
       vertical
-      className={cn("relative h-full w-full flex flex-col", className)}
-      style={{ ["--duration" as any]: duration } as React.CSSProperties}
+      className={cn(
+        "w-full relative h-full flex flex-col justify-center items-center",
+        className
+      )}
+      style={{} as React.CSSProperties & { ["--duration"]?: string }}
+      data-duration={duration}
     >
-      {Images.sort(() => Math.random() - 0.5).map((image, index) => (
-        <div key={index} className="h-40 w-full flex-shrink-0">
+      {Images.sort(() => Math.random() - 0.5).map((image, index) => {
+        return (
           <Image
+            key={index}
             src={image.src}
             alt={image.alt}
             priority
-            className="h-full w-full object-cover rounded-lg opacity-40 hover:opacity-100 transition-opacity duration-300 ease-in-out"
+            className="w-full h-full object-cover rounded opacity-[0.25] hover:opacity-100 transition-opacity duration-300 ease-in-out"
           />
-        </div>
-      ))}
+        );
+      })}
     </Marquee>
   );
 };
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center bg-background overflow-hidden">
-      <div className="absolute inset-0 z-0 grid xl:grid-cols-6 grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1 pointer-events-none opacity-30 overflow-hidden hover:opacity-100">
-        <MarqueeColumn reverse={false} duration="60s" />
-        <MarqueeColumn reverse={true} duration="90s" />
-        <MarqueeColumn reverse={false} duration="75s" />
-        <MarqueeColumn reverse={true} duration="100s" className=" hidden md:flex" />
-        <MarqueeColumn reverse={false} duration="80s" className=" hidden lg:flex" />
-        <MarqueeColumn reverse={true} duration="120s" className=" hidden lg:flex" />
-      </div>
-
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
       <div className="relative z-20 flex flex-col items-center text-center px-6 py-20">
         <RainbowButton asChild>
           <a
@@ -139,6 +135,26 @@ const HeroSection = () => {
             Create Your First AI Model <ArrowRight className="ml-2" />
           </Link>
         </Button>
+      </div>
+      <div className="absolute inset-0 z-0 grid xl:grid-cols-6 grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1 opacity-30 overflow-hidden hover:opacity-100">
+        <MarqueeColumn reverse={false} duration="60s" />
+        <MarqueeColumn reverse={true} duration="90s" />
+        <MarqueeColumn reverse={false} duration="75s" />
+        <MarqueeColumn
+          reverse={true}
+          duration="100s"
+          className=" hidden md:flex"
+        />
+        <MarqueeColumn
+          reverse={false}
+          duration="80s"
+          className=" hidden lg:flex"
+        />
+        <MarqueeColumn
+          reverse={true}
+          duration="120s"
+          className=" hidden lg:flex"
+        />
       </div>
     </section>
   );
