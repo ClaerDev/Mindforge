@@ -91,7 +91,7 @@ const HeroSection = () => {
       <div className="relative z-20 flex flex-col items-center text-center px-6 py-20">
         <RainbowButton asChild>
           <a
-            href="https://github.com/your-username/your-repo"
+            href="https://github.com/priyansh-narang2308/MindForge"
             target="_blank"
             rel="noopener noreferrer"
             className="mb-10 inline-flex items-center gap-2 px-6 py-3 text-base font-semibold hover:scale-105 transition-transform"
