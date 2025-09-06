@@ -16,10 +16,10 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Visionary AI",
+  title: "MindForge",
   description: "An AI-Image generator Sass and model generator",
   icons: {
-    icon: "/favv.png",
+    icon: "/mf.png",
   },
 };
 

@@ -28,7 +28,6 @@ const Pricing = ({ products, mostPopularProd = "pro" }: PricingProps) => {
   return (
     <section className="w-full bg-muted flex flex-col items-center justify-center">
       <div className="w-full container mx-auto py-24 md:py-32 flex flex-col items-center justify-center space-y-8 text-center px-6">
-        {/* Gradient Header */}
         <div className="relative inline-flex">
           <span
             className={cn(
@@ -43,7 +42,6 @@ const Pricing = ({ products, mostPopularProd = "pro" }: PricingProps) => {
           </span>
         </div>
 
-        {/* Title + Subtitle */}
         <h1 className="text-4xl md:text-5xl font-bold leading-tight text-foreground">
           Find the Right Plan for You
         </h1>
@@ -53,7 +51,6 @@ const Pricing = ({ products, mostPopularProd = "pro" }: PricingProps) => {
           vision.
         </p>
 
-        {/* Billing Toggle */}
         <div className="flex justify-center items-center space-x-4 py-6">
           <Label htmlFor="pricing-switch" className="font-semibold text-base">
             Monthly
@@ -70,7 +67,6 @@ const Pricing = ({ products, mostPopularProd = "pro" }: PricingProps) => {
           </Label>
         </div>
 
-        {/* Pricing Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-8xl">
           {products.map((product) => {
             const price = product?.prices.find(

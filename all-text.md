@@ -1,103 +1,77 @@
 
 ## Hero Section
 
-- Transform Your Photos with the Power of AI
-- From LinkedIn headshots to Instagram influencer photos, Visionary AI's state-of-the-art technology ensures you always look your best. Create, edit, and generate images effortlessly.
+- Transform Your Photos with the Power of 
+- From LinkedIn headshots to Instagram influencer photos, MindForge state-of-the-art technology ensures you always look your best. Create, edit, and generate images effortlessly.
 
 ```javascript
-const avatars = [
-  {
-    src: "/avatars/AutumnTechFocus.jpeg",
-    fallback: "CN",
-  },
-  {
-    src: "/avatars/Casual Creative Professional.jpeg",
-    fallback: "AB",
-  },
-  {
-    src: "/avatars/Golden Hour Contemplation.jpeg",
-    fallback: "FG",
-  },
-  {
-    src: "/avatars/Portrait of a Woman in Rust-Colored Top.jpeg",
-    fallback: "PW",
-  },
-  {
-    src: "/avatars/Radiant Comfort.jpeg",
-    fallback: "RC",
-  },
-  {
-    src: "/avatars/Relaxed Bearded Man with Tattoo at Cozy Cafe.jpeg",
-    fallback: "RB",
-  },
-];
 
 const Images = [
   {
     src: img1,
-    alt: "AI generated image",
+    alt: " generated image",
   },
   {
     src: img2,
-    alt: "AI generated image",
+    alt: " generated image",
   },
   {
     src: img3,
-    alt: "AI generated image",
+    alt: " generated image",
   },
   {
     src: img4,
-    alt: "AI generated image",
+    alt: " generated image",
   },
   {
     src: img5,
-    alt: "AI generated image",
+    alt: " generated image",
   },
   {
     src: img6,
-    alt: "AI generated image",
+    alt: " generated image",
   },
   {
     src: img7,
-    alt: "AI generated image",
+    alt: " generated image",
   },
   {
     src: img8,
-    alt: "AI generated image",
+    alt: " generated image",
   },
   {
     src: img9,
-    alt: "AI generated image",
+    alt: " generated image",
   },
   {
     src: img10,
-    alt: "AI generated image",
+    alt: " generated image",
   },
   {
     src: img11,
-    alt: "AI generated image",
+    alt: " generated image",
   },
 ];
 ```
 
 ## Features Section
 
-- Unlock Unlimited Possibilities with Visionary AI
-- Our platform offers a wide range of features designed to enhance your image creation experience. From easy-to-use editing tools to powerful AI-powered image generation, we have everything you need to bring your ideas to life.
+- Unlock Unlimited Possibilities with MindForge 
+- Our platform offers a wide range of features designed to enhance your image creation experience. From easy-to-use editing tools to powerful -powered image generation, we have everything you need to bring your ideas to life.
 
-    - AI-Powered Photos
-    Instantly transform your photos into high-quality, lifelike images with the power of AI. Whether you need fresh content for social media, professional shots for LinkedIn, or a fun set of images for personal project.
+    - -Powered Photos
+    Instantly transform your photos into high-quality, lifelike images with the power of . Whether you need fresh content for social media, professional shots for LinkedIn, or a fun set of images for personal project.
 
     - Diverse Photo Packs at Your Fingertips
-    Instantly transform your photos into high-quality, lifelike images with the power of AI. Whether you need fresh content for social media, professional shots for LinkedIn, or a fun set of images for personal project.    
+    Instantly transform your photos into high-quality, lifelike images with the power of . Whether you need fresh content for social media, professional shots for LinkedIn, or a fun set of images for personal project.    
 
     - Customizable Photo Generation
-    Instantly transform your photos into high-quality, lifelike images with the power of AI. Whether you need fresh content for social media, professional shots for LinkedIn, or a fun set of images for personal project.    
+    Instantly transform your photos into high-quality, lifelike images with the power of . Whether you need fresh content for social media, professional shots for LinkedIn, or a fun set of images for personal project.    
 
 ## Testimonials Section    
 
 - What Our Users Say
-- Discover why thousands are choosing Visionary AI for effortless, high-quality photo generation, from LinkedIn headshots to vibrant social media content.
+- Discover why thousands are choosing MindForge  for effortless, high-quality photo generation, from LinkedIn headshots to vibrant social media content.
 
 ```javascript
 const reviews = [
@@ -116,7 +90,7 @@ const reviews = [
   {
     name: "John Doe",
     username: "@johndoe",
-    body: "Using Photo AI for my LinkedIn profile was a fantastic decision. The quality was outstanding, and I got multiple job offers!",
+    body: "Using Photo  for my LinkedIn profile was a fantastic decision. The quality was outstanding, and I got multiple job offers!",
     img: avatar3,
   },
   {
@@ -147,18 +121,18 @@ const reviews = [
 
 ```javascript
 const faqsList = [
-  {question: "How does Visionary AI work?", answer: "Visionary AI uses advanced machine learning algorithms to analyze and understand your photos. It then generates new images based on your features and the scenarios you choose, creating realistic and personalized results."},
-  {question: "Is my data safe with Visionary AI?", answer: "Yes, we take data privacy very seriously. All uploaded photos and generated images are encrypted and stored securely. We never share your personal data or images with third parties without your explicit consent."},
-  {question: "How many photos do I need to upload for best results?", answer: "For optimal results, we recommend uploading at least 10-20 diverse photos of yourself. This helps our AI model better understand your features and expressions, leading to more accurate and realistic generated images."},
-  {question: "Can I use Visionary AI for commercial purposes?", answer: "Yes, our Pro and Enterprise plans include commercial usage rights for the images you generate. However, please note that you should always respect copyright and privacy laws when using AI-generated images."},
-  {question: "How often do you update the AI model?", answer: "We continuously work on improving our AI model. Major updates are typically released quarterly, with minor improvements and optimizations happening more frequently. All users benefit from these updates automatically."},
-  {question: "What are the differences between the free and paid plans?", answer: "The free plan allows you to generate up to 5 images per day. The Pro plan includes unlimited image generation, higher resolution output, and access to additional features. The Enterprise plan is tailored for businesses and offers custom integrations and dedicated support."},
+  {question: "How does MindForge  work?", answer: "MindForge  uses advanced machine learning algorithms to analyze and understand your photos. It then generates new images based on your features and the scenarios you choose, creating realistic and personalized results."},
+  {question: "Is my data safe with MindForge ?", answer: "Yes, we take data privacy very seriously. All uploaded photos and generated images are encrypted and stored securely. We never share your personal data or images with third parties without your explicit consent."},
+  {question: "How many photos do I need to upload for best results?", answer: "For optimal results, we recommend uploading at least 10-20 diverse photos of yourself. This helps our  model better understand your features and expressions, leading to more accurate and realistic generated images."},
+  {question: "Can I use MindForge  for commercial purposes?", answer: "Yes, our Pro and Enterprise plans include commercial usage rights for the images you generate. However, please note that you should always respect copyright and privacy laws when using -generated images."},
+  {question: "How often do you update the  model?", answer: "We continuously work on improving our  model. Major updates are typically released quarterly, with minor improvements and optimizations happening more frequently. All users benefit from these updates automatically."},
+  {question: "What are the differences between the free and pd plans?", answer: "The free plan allows you to generate up to 5 images per day. The Pro plan includes unlimited image generation, higher resolution output, and access to additional features. The Enterprise plan is tlored for businesses and offers custom integrations and dedicated support."},
 ]
 ```
 
 ## CTA Section
 
 - Ready to Transform Your Photos?
-- Join thousands of users who are already creating amazing AI-generated images.
+- Join thousands of users who are already creating amazing -generated images.
 
 

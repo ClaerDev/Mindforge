@@ -1,3 +1,5 @@
+import HeroSection from "@/components/landing-page/hero-section";
+import Navigation from "@/components/landing-page/navigation";
 import Pricing from "@/components/landing-page/pricing-section";
 import { getProducts, getUser } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/server";
@@ -12,12 +14,14 @@ export default async function Home() {
     getProducts(suapabse), //get current actve produdcts
   ]);
 
-  // if(user){
-  //   return redirect("/dashboard")
-  // }
+  if (user) {
+    return redirect("/dashboard");
+  }
 
   return (
     <main className="flex flex-col min-h-screen items-center justify-center">
+      <Navigation />
+      <HeroSection />
       <Pricing products={products ?? []} />
     </main>
   );

@@ -11,12 +11,23 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { SparklesIcon } from "lucide-react";
+import { LoaderPinwheel } from "lucide-react";
 import { NavUser } from "./nav-user";
+
+// Add interface for subscription data
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  subscription?: {
+    prices?: {
+      products?: {
+        name?: string;
+      } | null;
+    } | null;
+  } | null;
+}
 
 export async function AppSidebar({
   ...props
-}: React.ComponentProps<typeof Sidebar>) {
+}: AppSidebarProps) {
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
 
@@ -25,24 +36,25 @@ export async function AppSidebar({
     email: data?.user?.email ?? "",
   };
 
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <SidebarMenuButton
-          size="lg"
-          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-        >
-          <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-            <SparklesIcon className="size-4" />
-          </div>
-          <Link href={"/"}>
-            <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-bold">Visionary AI</span>
-              <span className="truncate text-xs">Pro</span>
-            </div>
-          </Link>
-        </SidebarMenuButton>{" "}
-      </SidebarHeader>
+  <Link href="/" passHref>
+    <SidebarMenuButton
+      size="lg"
+      className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+    >
+      <div className="flex aspect-square size-10 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+        <LoaderPinwheel className="size-5" />
+      </div>
+      <div className="grid flex-1 text-left text-2xl leading-tight">
+        <span className="truncate font-bold">MindForge</span>
+      </div>
+    </SidebarMenuButton>
+  </Link>
+</SidebarHeader>
+
       <SidebarContent>
         <NavMain />
       </SidebarContent>

@@ -60,7 +60,7 @@ export async function POST(req: Request) {
     // ✅ Helper to send emails via Resend
     async function sendEmail(to: string, subject: string, htmlContent: string) {
       return resend.emails.send({
-        from: "Visionary AI <onboarding@resend.dev>",
+        from: "MindForge <onboarding@resend.dev>",
         to: [to],
         subject,
         html: htmlContent,

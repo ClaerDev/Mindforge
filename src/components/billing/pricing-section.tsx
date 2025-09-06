@@ -62,7 +62,7 @@ const renderPricingButton = ({
     user &&
     subscription &&
     subscription?.prices?.products?.name?.toLowerCase() ===
-      product?.name?.toLowerCase()
+    product?.name?.toLowerCase()
   ) {
     // user has already subscribed to this plan!
     return (
@@ -161,8 +161,6 @@ const Pricing = ({
     const stripe = await getStripe();
     // move to the stripcheckut page
     stripe?.redirectToCheckout({ sessionId });
-
-    return "Stripe Checkput Funtion";
   };
 
   const handleStripePortalRequest = async () => {
@@ -212,7 +210,7 @@ const Pricing = ({
               key={product.id}
               className={cn(
                 "flex flex-col justify-between rounded-xl border bg-background shadow-md hover:shadow-lg transition-all duration-300 p-6 text-left h-full",
-                "min-w-[240px] max-w-[320px] mx-auto w-full",
+                "min-w-[240px] max-w-[320px] mx-auto w-full ml-1",
                 isPopular
                   ? "border-primary ring-2 ring-primary/20 relative"
                   : "border-border"
@@ -227,12 +225,12 @@ const Pricing = ({
               )}
               {product.name?.toLowerCase() ===
                 mostPopularProd.toLowerCase() && (
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-primary shadow-md">
-                    Most Popular
-                  </span>
-                </div>
-              )}
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-primary shadow-md">
+                      Most Popular
+                    </span>
+                  </div>
+                )}
 
               <div className="flex-grow">
                 <div className="flex items-center justify-center">

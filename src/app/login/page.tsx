@@ -37,7 +37,7 @@ const AuthPage = async ({
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-xl">
-              &ldquo;Visionary AI is a game changer for me. I have been able to
+              &ldquo;MindForge is a game changer for me. I have been able to
               generate high quality professional headshots within minutes. It
               has saved me countless hours of work and cost as well.&rdquo;
             </p>
