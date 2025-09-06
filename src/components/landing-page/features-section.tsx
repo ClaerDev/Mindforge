@@ -1,9 +1,9 @@
 import React from "react";
-import { Badge } from "../ui/badge";
 import { ImageIcon, Package2, Palette } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import dashboard from "@/public/dashboard.png";
+import { SparklesText } from "../magicui/sparkles-text";
 
 const featureList = [
   {
@@ -34,11 +34,10 @@ const Features = () => {
     >
       <div className="container px-6 xs:px-8 sm:px-0 sm:mx-8 lg:mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 relative bg-muted">
         <div className=" col-span-2 space-y-4">
-          <Badge className="backdrop-blur-lg text-lg">Features</Badge>
 
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold">
+          <SparklesText className="text-2xl xs:text-3xl sm:text-4xl font-bold">
             Unlock Unlimited Possibilities with MindForge{" "}
-          </h2>
+          </SparklesText>
           <p className="text-base text-muted-foreground lg:max-w-[75%]">
             Our platform offers a wide range of features designed to enhance
             your image creation experience. From easy-to-use editing tools to

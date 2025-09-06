@@ -2,6 +2,7 @@ import Features from "@/components/landing-page/features-section";
 import HeroSection from "@/components/landing-page/hero-section";
 import Navigation from "@/components/landing-page/navigation";
 import Pricing from "@/components/landing-page/pricing-section";
+import Testimonials from "@/components/landing-page/testim-section";
 import { getProducts, getUser } from "@/lib/supabase/queries";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
@@ -23,7 +24,8 @@ export default async function Home() {
     <main className="flex flex-col min-h-screen items-center justify-center">
       <Navigation />
       <HeroSection />
-      <Features/>
+      <Features />
+      <Testimonials />
       <Pricing products={products ?? []} />
     </main>
   );
