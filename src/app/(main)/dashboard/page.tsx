@@ -1,6 +1,7 @@
 import { getCredits } from "@/app/actions/credit-action";
 import { fetchImages } from "@/app/actions/image-actions";
 import { fetchModels } from "@/app/actions/model-actions";
+import QuickActions from "@/components/dashboard/quick-actions";
 import RecentImages from "@/components/dashboard/recent-images";
 import StatsCard from "@/components/dashboard/stats-user";
 import { createClient } from "@/lib/supabase/server";
@@ -37,7 +38,7 @@ export default async function Page() {
 
       <div className="grid gap-6 grid-cols-4">
         <RecentImages images={images?.slice(0, 6) ?? []} />
-        quick actions
+<QuickActions/>
       </div>
     </section>
   );
