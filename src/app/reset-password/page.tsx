@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import AuthImage from "@/public/Abstract Curves and Colors.jpeg";
+import AuthImage from "@/public/bg.jpeg";
 import Logo from "@/components/logo";
 import ResetPassword from "@/components/account-settings/reset-password";
 
