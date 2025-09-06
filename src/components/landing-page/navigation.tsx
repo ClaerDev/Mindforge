@@ -21,7 +21,7 @@ const NavItems = () => {
         Pricing
       </Link>
       <Link
-        href="#fqs"
+        href="#faqs"
         className="text-sm font-medium hover:underline underline-offset-4"
       >
         FAQs

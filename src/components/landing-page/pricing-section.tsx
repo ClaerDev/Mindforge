@@ -26,7 +26,7 @@ const Pricing = ({ products, mostPopularProd = "pro" }: PricingProps) => {
   const [billingInterval, setBillingInterval] = useState("month");
 
   return (
-    <section className="w-full bg-muted flex flex-col items-center justify-center">
+    <section id="pricing" className="w-full bg-muted flex flex-col items-center justify-center">
       <div className="w-full container mx-auto py-24 md:py-32 flex flex-col items-center justify-center space-y-8 text-center px-6">
         <div className="relative inline-flex">
           <span
