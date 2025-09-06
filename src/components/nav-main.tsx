@@ -53,7 +53,7 @@ const navItems = [
     icon: CreditCard,
   },
   {
-    title: "Setting",
+    title: "Settings",
     url: "/account-settings",
     icon: Settings2,
   },

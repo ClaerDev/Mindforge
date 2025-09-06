@@ -46,7 +46,7 @@ const LoginForm = ({ className }: { className?: string }) => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    toast.loading(" Logging In...", { id: toastId });
+    toast.loading("Logging In...", { id: toastId });
     setLoading(true);
 
     const formData = new FormData();
@@ -80,7 +80,6 @@ const LoginForm = ({ className }: { className?: string }) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-5"
         >
-          {/* Email */}
           <FormField
             control={form.control}
             name="email"
@@ -102,7 +101,6 @@ const LoginForm = ({ className }: { className?: string }) => {
             )}
           />
 
-          {/* Password */}
           <FormField
             control={form.control}
             name="password"

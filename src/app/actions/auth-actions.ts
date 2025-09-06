@@ -97,3 +97,19 @@ export async function resetPassword(values: {
     data: resetPassword || null,
   };
 }
+
+export async function changePasword(
+  newPassword: string
+): Promise<AuthResponse> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.auth.updateUser({
+    password: newPassword,
+  });
+
+  return {
+    error: error?.message || "There was an error resetting the password!",
+    success: !error,
+    data: data || null,
+  };
+}

@@ -17,6 +17,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import { useId } from "react";
+import { resetPassword } from "@/app/actions/auth-actions";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -31,9 +34,31 @@ const ResetPasswordForm = ({ className }: { className?: string }) => {
       email: "",
     },
   });
+  const toastId = useId();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    toast.loading("Sending reset password email...", { id: toastId });
+    try {
+      const { success, error } = await resetPassword({
+        email: values?.email || "",
+      });
+      if (!success) {
+        toast.error(error, { id: toastId });
+      } else {
+        toast.success(
+          "Password reset email send! Please check your email for instructions!",
+          { id: toastId }
+        );
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error(
+        error?.message || "There is an error sending password reset email!!",
+        {
+          id: toastId,
+        }
+      );
+    }
   }
 
   return (

@@ -2,10 +2,9 @@ import Image from "next/image";
 import React from "react";
 import AuthImage from "@/public/Abstract Curves and Colors.jpeg";
 import Logo from "@/components/logo";
+import ResetPassword from "@/components/account-settings/reset-password";
 
 const ResetPasswordPage = async () => {
-
-
   return (
     <main className="h-screen grid grid-cols-1 md:grid-cols-2 relative">
       <div className="hidden md:flex relative w-full flex-col bg-muted p-10 text-primary-foreground">
@@ -38,7 +37,7 @@ const ResetPasswordPage = async () => {
 
       <div className="relative flex flex-col items-center justify-center p-6 md:p-8 h-full w-full">
         <div className="w-full max-w-sm sm:max-w-md md:w-[350px]">
-{/* CHANGE PASSWORD FORM*/}
+          <ResetPassword />
         </div>
       </div>
     </main>
