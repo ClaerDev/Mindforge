@@ -169,6 +169,7 @@
     --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
     --animate-marquee: marquee var(--duration) infinite linear;
     --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+    --animate-pulse: pulse var(--duration) ease-out infinite;
   }
 }
 
@@ -209,6 +210,14 @@
     }
   to {
     transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes pulse {
+  0%, 100% {
+    boxShadow: 0 0 0 0 var(--pulse-color);
+    }
+  50% {
+    boxShadow: 0 0 0 8px var(--pulse-color);
     }
   }
 }
