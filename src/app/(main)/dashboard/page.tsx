@@ -3,6 +3,7 @@ import { fetchImages } from "@/app/actions/image-actions";
 import { fetchModels } from "@/app/actions/model-actions";
 import QuickActions from "@/components/dashboard/quick-actions";
 import RecentImages from "@/components/dashboard/recent-images";
+import RecentModels from "@/components/dashboard/recent-models";
 import StatsCard from "@/components/dashboard/stats-user";
 import { createClient } from "@/lib/supabase/server";
 
@@ -12,7 +13,7 @@ export default async function Page() {
     data: { user },
   } = await supaabse.auth.getUser();
 
-  const { count: modelCount } = await fetchModels();
+  const { data: models, count: modelCount } = await fetchModels();
   const { data: credits } = await getCredits();
   const { data: images } = await fetchImages();
 
@@ -38,7 +39,8 @@ export default async function Page() {
 
       <div className="grid gap-6 grid-cols-4">
         <RecentImages images={images?.slice(0, 6) ?? []} />
-<QuickActions/>
+        <div className="h-full flex flex-col space-y-6"><QuickActions />
+        <RecentModels models={models ?? []} /></div>
       </div>
     </section>
   );

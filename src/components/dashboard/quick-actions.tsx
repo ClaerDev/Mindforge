@@ -13,7 +13,7 @@ const QuickActions = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base font-medium tracking-tight">
+        <CardTitle className="text-lg font-medium tracking-tight">
           Quick Actions
         </CardTitle>
         <CardDescription>Get started with common actions</CardDescription>
