@@ -99,6 +99,7 @@ export async function POST(req: Request) {
         .eq("user_id", userId)
         .eq("model_name", modelName);
 
+        // fetch old credits
       const { data: oldCredits, error } = await supabaseAdmin
         .from("credits")
         .select("model_training_count")
@@ -109,6 +110,7 @@ export async function POST(req: Request) {
         throw new Error("Error fetching user credits!");
       }
 
+      // update the credits
       await supabaseAdmin
         .from("credits")
         // increase the count by 1 now
