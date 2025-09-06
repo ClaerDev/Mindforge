@@ -37,11 +37,11 @@ const StatsCard = ({ imageCount, modelCount, credits }: StatsCardProps) => {
   ];
 
   return (
-  <div className="grid grid-cols-4 gap-4">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
     {cards.map((card, i) => (
       <Card
         key={i}
-        className="group relative overflow-hidden border border-border bg-card hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 rounded-lg max-w-xs"
+        className="group relative overflow-hidden border border-border bg-card hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 rounded-lg max-w-xs w-full"
       >
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 px-3 pt-3">
           <CardTitle className="text-base font-medium tracking-tight">
@@ -64,6 +64,7 @@ const StatsCard = ({ imageCount, modelCount, credits }: StatsCardProps) => {
     ))}
   </div>
 );
+
 
 };
 

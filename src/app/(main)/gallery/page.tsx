@@ -8,7 +8,7 @@ const Gallery = async () => {
   return (
     <section className="container mx-auto pl-12">
       <h1 className="text-3xl font-bold mb-2">My Images</h1>
-      <p className="text-sm text-muted-foreground mb-6 ">
+      <p className="text-lg text-muted-foreground mb-6 ">
         Here you can see all images you have generated. Click on an image to
         view the details.
       </p>

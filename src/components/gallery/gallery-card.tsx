@@ -39,47 +39,41 @@ const GalleryCard = ({ images }: GalleryProps) => {
 }
 
   return (
-    <section className="container mx-auto py-8">
-      <div className="columns-4 gap-4 space-y-4">
-        {images?.map((image, index) => {
-          return (
-            <div key={index}>
-              <div
-                onClick={() => setSelectedImage(image)}
-                className="relative group overflow-hidden cursor-pointer transition-transform"
-              >
-                <div className="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-70 rounded-2xl">
-                  <div className="flex justify-center items-center h-full">
-                    <p className="text-primary-foreground font-semibold text-lg">
-                      View Details
-                    </p>
-                  </div>
-                </div>
-                <Image
-                  src={image.url ?? ""}
-                  alt={image.prompt ?? ""}
-                  width={image.width ?? 0}
-                  height={image.height ?? 0}
-                  className="object-cover rounded-2xl border border-gray-100 bg-white 
-            hover:scale-90
-             transition-all duration-300 ease-out"
-                />
-              </div>
+  <section className="container mx-auto py-8 px-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {images?.map((image, index) => (
+        <div key={index}>
+          <div
+            onClick={() => setSelectedImage(image)}
+            className="relative group overflow-hidden cursor-pointer transition-transform rounded-2xl"
+          >
+            <div className="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-70 rounded-2xl flex justify-center items-center">
+              <p className="text-primary-foreground font-semibold text-lg">
+                View Details
+              </p>
             </div>
-          );
-        })}
-      </div>
+            <Image
+              src={image.url ?? ""}
+              alt={image.prompt ?? ""}
+              width={image.width ?? 0}
+              height={image.height ?? 0}
+              className="object-cover rounded-2xl border border-gray-100 bg-white w-full h-auto 
+                hover:scale-95 transition-transform duration-300 ease-out"
+            />
+          </div>
+        </div>
+      ))}
+    </div>
 
-      {/* pass the selecytedt image detailed */}
+    {selectedImage && (
+      <ImaegSheet
+        image={selectedImage}
+        onClose={() => setSelectedImage(null)}
+      />
+    )}
+  </section>
+);
 
-      {selectedImage && (
-        <ImaegSheet
-          image={selectedImage}
-          onClose={() => setSelectedImage(null)}
-        />
-      )}
-    </section>
-  );
 };
 
 export default GalleryCard;

@@ -122,69 +122,59 @@ const SummaryPlan = ({
             </Badge>
           </h3>
 
-          <div className="grid grid-cols-8 gap-4">
-            <div className="col-span-5 flex flex-col gap-6 pr-12">
-              <div className="flex flex-col">
-                <div className="flex items-center justify-between text-sm pb-2">
-                  <span className="text-muted-foreground ml-1">
-                    Image generation credits
-                  </span>
-                  <span className="font-medium">
-                    {imagegenerationCount}/{max_image_gen_count}
-                  </span>
-                </div>
-                <Progress
-                  value={(imagegenerationCount / max_image_gen_count) * 100}
-                  className="w-full h-2"
-                />
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-8 gap-4">
+  <div className="md:col-span-5 flex flex-col gap-6 pr-0 md:pr-12">
+    <div className="flex flex-col">
+      <div className="flex items-center justify-between text-sm pb-2">
+        <span className="text-muted-foreground ml-1">
+          Image generation credits
+        </span>
+        <span className="font-medium">
+          {imagegenerationCount}/{max_image_gen_count}
+        </span>
+      </div>
+      <Progress
+        value={(imagegenerationCount / max_image_gen_count) * 100}
+        className="w-full h-2"
+      />
+    </div>
 
-              <div className="flex flex-col">
-                <div className="flex items-center justify-between text-sm pb-2">
-                  <span className="text-muted-foreground ml-1">
-                    Model training credits
-                  </span>
-                  <span className="font-medium">
-                    {modelTrainCount}/{max_model_train_count}
-                  </span>
-                </div>
-                <Progress
-                  value={(modelTrainCount / max_model_train_count) * 100}
-                  className="w-full h-2"
-                />
-              </div>
-            </div>
+    <div className="flex flex-col">
+      <div className="flex items-center justify-between text-sm pb-2">
+        <span className="text-muted-foreground ml-1">
+          Model training credits
+        </span>
+        <span className="font-medium">
+          {modelTrainCount}/{max_model_train_count}
+        </span>
+      </div>
+      <Progress
+        value={(modelTrainCount / max_model_train_count) * 100}
+        className="w-full h-2"
+      />
+    </div>
+  </div>
 
-            <div className="col-span-3 flex flex-row justify-between flex-wrap ">
-              {" "}
-              <div className="flex flex-col pb-0">
-                {" "}
-                <div className="text-sm font-normal">Price/month</div>{" "}
-                <div className="flex-1 pt-1 tetx-sm font-medium">
-                  {" "}
-                  {priceString}{" "}
-                </div>{" "}
-              </div>{" "}
-              <div className="flex flex-col pb-0">
-                {" "}
-                <div className="text-sm font-normal">Included Credits</div>{" "}
-                <div className="flex-1 pt-1 tetx-sm font-medium">
-                  {max_image_gen_count}
-                </div>{" "}
-              </div>{" "}
-              <div className="flex flex-col pb-0">
-                {" "}
-                <div className="text-sm font-normal">Renewal Date</div>{" "}
-                <div className="flex-1 pt-1 tetx-sm font-medium">
-                  {" "}
-                  {format(
-                    new Date(subscription.current_period_end),
-                    "MMM d, yyyy"
-                  )}{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>
-          </div>
+  <div className="md:col-span-3 flex flex-col md:flex-row justify-between flex-wrap gap-4">
+    <div className="flex flex-col">
+      <div className="text-sm font-normal">Price/month</div>
+      <div className="pt-1 text-sm font-medium">{priceString}</div>
+    </div>
+
+    <div className="flex flex-col">
+      <div className="text-sm font-normal">Included Credits</div>
+      <div className="pt-1 text-sm font-medium">{max_image_gen_count}</div>
+    </div>
+
+    <div className="flex flex-col">
+      <div className="text-sm font-normal">Renewal Date</div>
+      <div className="pt-1 text-sm font-medium">
+        {format(new Date(subscription.current_period_end), "MMM d, yyyy")}
+      </div>
+    </div>
+  </div>
+</div>
+
         </CardContent>
         <hr />
       </Card>

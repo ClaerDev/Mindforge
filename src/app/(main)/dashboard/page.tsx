@@ -37,10 +37,12 @@ export default async function Page() {
         credits={credits}
       />
 
-      <div className="grid gap-6 grid-cols-4">
+      <div className="grid gap-6 grid-cols-1 md:grid-cols-4">
         <RecentImages images={images?.slice(0, 6) ?? []} />
-        <div className="h-full flex flex-col space-y-6"><QuickActions />
-        <RecentModels models={models ?? []} /></div>
+        <div className="h-full flex flex-col space-y-6">
+          <QuickActions />
+          <RecentModels models={models ?? []} />
+        </div>
       </div>
     </section>
   );
