@@ -67,7 +67,7 @@ const MarqueeColumn = ({
         "w-full relative h-full flex flex-col justify-center items-center",
         className
       )}
-      style={{} as React.CSSProperties & { ["--duration"]?: string }}
+      style={{ ["--duration"]: duration } as React.CSSProperties}
       data-duration={duration}
     >
       {Images.sort(() => Math.random() - 0.5).map((image, index) => {
