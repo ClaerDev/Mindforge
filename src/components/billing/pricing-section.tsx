@@ -10,9 +10,10 @@ import { Tables } from "@database.types";
 import { User } from "@supabase/supabase-js";
 import { Button } from "../ui/button";
 import { usePathname, useRouter } from "next/navigation";
-import { checkoutWithStripe } from "@/lib/stripe/server";
+import { checkoutWithStripe, createStripePortal } from "@/lib/stripe/server";
 import { getErrorRedirect } from "@/lib/helper";
 import { getStripe } from "@/lib/stripe/client";
+import { toast } from "sonner";
 type Product = Tables<"products">;
 type Price = Tables<"prices">;
 type Subscription = Tables<"subscriptions">;
@@ -53,10 +54,41 @@ const renderPricingButton = ({
   product: ProductWithPrices;
   price: Price;
   mostPopularProd: string;
-  handleStripeCheckout: () => Promise<void>;
+  handleStripeCheckout: (price: Price) => Promise<void>;
   handleStripePortalRequest: () => Promise<void>;
 }) => {
-  // Case1:User has active subscription of this account
+  // Case1:User has active subscription of this account for this product
+  if (
+    user &&
+    subscription &&
+    subscription?.prices?.products?.name?.toLowerCase() ===
+      product?.name?.toLowerCase()
+  ) {
+    // user has already subscribed to this plan!
+    return (
+      <Button
+        className="mt-8 w-full font-semibold"
+        onClick={handleStripePortalRequest}
+      >
+        Manage Subscription
+      </Button>
+    );
+  }
+
+  // Case2: If logged in and has a active subscriotion for diff product
+  if (user && subscription) {
+    return (
+      <Button
+        className="mt-8 w-full font-semibold text-black"
+        variant={"secondary"}
+        onClick={handleStripePortalRequest}
+      >
+        Switch Plan
+      </Button>
+    );
+  }
+
+  // Logged in user with no subscription plan
   if (user && !subscription) {
     return (
       <Button
@@ -72,7 +104,19 @@ const renderPricingButton = ({
       </Button>
     );
   }
-  return null;
+  return (
+    <Button
+      variant={
+        product.name?.toLowerCase() === mostPopularProd.toLowerCase()
+          ? "default"
+          : "secondary"
+      }
+      className="mt-8 w-full font-semibold"
+      onClick={() => handleStripeCheckout(price)}
+    >
+      Subscribe
+    </Button>
+  );
 };
 
 const Pricing = ({
@@ -82,7 +126,7 @@ const Pricing = ({
   mostPopularProd = "",
   showInterval = true,
   className,
-  activeProduct=""
+  activeProduct = "",
 }: PricingProps) => {
   const [billingInterval, setBillingInterval] = useState("month");
 
@@ -121,8 +165,10 @@ const Pricing = ({
     return "Stripe Checkput Funtion";
   };
 
-  const handleStripePortalRequest = () => {
-    return "Stripe Portatl CHeckout Funtion";
+  const handleStripePortalRequest = async () => {
+    toast.info("Redirecting to stripe portal...");
+    const redirectUrl = await createStripePortal(currentPaht);
+    return router.push(redirectUrl);
   };
 
   return (
@@ -146,8 +192,8 @@ const Pricing = ({
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 space-y-0 gap-4 sm:gap-6 w-full mx-auto">
-        {products.map((product) => {
-          const price = product?.prices.find(
+        {(products ?? []).map((product) => {
+          const price = product?.prices?.find(
             (price) => price.interval === billingInterval
           );
           if (!price) return null;
@@ -172,15 +218,15 @@ const Pricing = ({
                   : "border-border"
               )}
             >
-
-               {            product.name?.toLowerCase() === activeProduct.toLowerCase() && (
+              {product.name?.toLowerCase() === activeProduct.toLowerCase() && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-primary shadow-md">
                     Selected
                   </span>
                 </div>
               )}
-              {            product.name?.toLowerCase() === mostPopularProd.toLowerCase() && (
+              {product.name?.toLowerCase() ===
+                mostPopularProd.toLowerCase() && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-primary shadow-md">
                     Most Popular

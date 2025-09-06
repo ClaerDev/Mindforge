@@ -10,6 +10,7 @@ import { Database } from "@database.types";
 
 import { imageMeta } from "image-meta";
 import { randomUUID } from "crypto";
+import { getCredits } from "./credit-action";
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
@@ -28,6 +29,16 @@ export async function generatedImagesAction(
   if (!process.env.REPLICATE_API_TOKEN) {
     return {
       error: "The Replicate API Token is not valid!",
+      success: false,
+      data: null,
+    };
+  }
+
+  // to update thhe credits
+  const { data: credits } = await getCredits();
+  if (!credits?.image_generation_count || credits.image_generation_count <= 0) {
+    return {
+      error: "No credits available",
       success: false,
       data: null,
     };
@@ -272,3 +283,7 @@ export async function deleteteImages(id?: string, imageName?: string) {
     data: data,
   };
 }
+
+
+
+// 10:41:18

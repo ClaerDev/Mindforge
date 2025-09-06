@@ -10,6 +10,25 @@ const replicate = new Replicate({
 const WEBHOOK_URL =
   process.env.SITE_URL ?? "https://266704a54dee.ngrok-free.app";
 
+async function validateUserCredits(userId: string) {
+  const { data: userCredits, error } = await supabaseAdmin
+    .from("credits")
+    .select("*")
+    .eq("user_id", userId)
+    .single();
+
+  if (error) {
+    throw new Error("Error fetching user credits!");
+  }
+
+  const credits = userCredits?.model_training_count ?? 0;
+  if (credits <= 0) {
+    throw new Error("No credits left for training!");
+  }
+
+  return credits;
+}
+
 export async function POST(request: NextRequest) {
   try {
     if (!process.env.REPLICATE_API_TOKEN) {
@@ -43,6 +62,8 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    const oldCredits = await validateUserCredits(user?.id);
 
     const fileName = input.fileKey.replace("training_data/", "");
     // get the URL to pass to lora trainer
@@ -87,7 +108,7 @@ export async function POST(request: NextRequest) {
         }&modelName=${encodeURIComponent(
           input.modelName
         )}&fileName=${encodeURIComponent(fileName)}`,
-webhook_events_filter: ["start", "completed"],
+        webhook_events_filter: ["start", "completed"],
       }
     );
 
@@ -103,6 +124,13 @@ webhook_events_filter: ["start", "completed"],
       training_steps: 1200,
       training_id: training.id,
     });
+
+    // updating rhe credits
+    // decrease the count by 1
+    await supabaseAdmin
+      .from("credits")
+      .update({ model_training_count: oldCredits - 1 })
+      .eq("user_id", user?.id);
 
     // console.log(training);
 

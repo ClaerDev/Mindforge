@@ -98,6 +98,23 @@ export async function POST(req: Request) {
         })
         .eq("user_id", userId)
         .eq("model_name", modelName);
+
+      const { data: oldCredits, error } = await supabaseAdmin
+        .from("credits")
+        .select("model_training_count")
+        .eq("user_id", userId)
+        .single();
+
+      if (error) {
+        throw new Error("Error fetching user credits!");
+      }
+
+      await supabaseAdmin
+        .from("credits")
+        // increase the count by 1 now
+        .update({ model_training_count: oldCredits?.model_training_count + 1 })
+        .eq("user_id", userId)
+        .single();
     }
 
     // ✅ Remove training file from storage

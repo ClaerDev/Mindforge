@@ -100,7 +100,7 @@ const Configuration = ({ userModels, model_id }: ConfigProps) => {
     defaultValues: {
       model: model_id
         ? `priyansh-narang2308/${model_id}`
-        : "black-forest-labs /flux-dev",
+        : "black-forest-labs/flux-dev",
       prompt: "",
       guidance: 3.5,
       num_outputs: 1,
@@ -132,8 +132,6 @@ const Configuration = ({ userModels, model_id }: ConfigProps) => {
   }, [form]);
 
   async function onSubmit(values: z.infer<typeof ImaegGenerationFormSchema>) {
-    await generatedImage(values);
-
     const newValues = {
       ...values,
       prompt: values.model.startsWith("priyansh-narang2308/")
