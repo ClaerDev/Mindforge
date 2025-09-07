@@ -8,7 +8,7 @@ const replicate = new Replicate({
 });
 
 const WEBHOOK_URL =
-  process.env.SITE_URL ?? "https://266704a54dee.ngrok-free.app";
+  process.env.SITE_URL ?? "https://mindforgee.vercel.app";
 
 async function validateUserCredits(userId: string) {
   const { data: userCredits, error } = await supabaseAdmin
