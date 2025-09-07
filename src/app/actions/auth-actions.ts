@@ -30,12 +30,22 @@ export async function signup(formData: FormData): Promise<AuthResponse> {
     },
   });
 
+  if (signUpData?.user && !error) {
+    await supabase.from("credits").insert([
+      {
+        user_id: signUpData.user.id,
+        credits: 10, 
+      },
+    ]);
+  }
+
   return {
-    error: error?.message || "There was an error signing up",
+    error: error?.message || (error ? "There was an error signing up" : null),
     success: !error,
     data: signUpData || null,
   };
 }
+
 
 export async function login(formData: FormData): Promise<AuthResponse> {
   const supabase = await createClient();

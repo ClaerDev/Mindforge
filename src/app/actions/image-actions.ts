@@ -10,7 +10,7 @@ import { Database } from "@database.types";
 
 import { imageMeta } from "image-meta";
 import { randomUUID } from "crypto";
-import { getCredits } from "./credit-action";
+import { deductCredits, getCredits } from "./credit-action";
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
@@ -75,7 +75,9 @@ export async function generatedImagesAction(
     const output = await replicate.run(input.model as `${string}/${string}`, {
       input: modelInput,
     });
-    console.log("Output: ", output);
+
+    const creditsToDeduct = input.num_outputs ?? 1;
+    await deductCredits(creditsToDeduct);
 
     return {
       error: null,
@@ -283,7 +285,3 @@ export async function deleteteImages(id?: string, imageName?: string) {
     data: data,
   };
 }
-
-
-
-// 10:41:18
