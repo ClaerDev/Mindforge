@@ -22,6 +22,12 @@ import { toast } from "sonner";
 import { signup } from "@/app/actions/auth-actions";
 import { redirect } from "next/navigation";
 
+interface SignUpFormProps {
+  className?: string;
+  agreed?: boolean;
+}
+
+
 const passwordVlaidation = new RegExp(
   "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
 );
@@ -54,7 +60,7 @@ export const formSchema = z
     path: ["confirmPassword"],
   });
 
-const SignUpForm = ({ className }: { className?: string }) => {
+const SignUpForm = ({ className, agreed = false }: SignUpFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -206,7 +212,7 @@ const SignUpForm = ({ className }: { className?: string }) => {
 
           <Button
             type="submit"
-            disabled={loading}
+            disabled={loading || !agreed} 
             className="w-full cursor-pointer text-white shadow-md hover:opacity-90 transition-all flex items-center justify-center gap-2"
           >
             {loading ? (

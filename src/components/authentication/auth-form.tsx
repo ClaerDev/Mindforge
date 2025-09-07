@@ -54,49 +54,44 @@ const AuthForm = ({ state }: { state: string }) => {
       )}
 
       {mode === "signup" && (
-        <>
-          <SignUpForm />
+  <>
+    <SignUpForm agreed={agreed} /> 
 
-          <div className="flex items-start gap-2 px-2 md:px-8 text-sm text-muted-foreground">
-            <Checkbox
-              id="terms"
-              checked={agreed}
-              onCheckedChange={(val) => setAgreed(!!val)}
-              className="mt-0.5"
-            />
-            <label
-              htmlFor="terms"
-              className="leading-snug cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              By signing up, you agree to our{" "}
-              <Link
-                href="#"
-                className="underline underline-offset-4 hover:text-primary"
-              >
-                Terms of Service
-              </Link>{" "}
-              and{" "}
-              <Link
-                href="#"
-                className="underline underline-offset-4 hover:text-primary"
-              >
-                Privacy Policy
-              </Link>
-              .
-            </label>
-          </div>
+    <div className="flex items-start gap-2 px-2 md:px-8 text-sm text-muted-foreground">
+      <Checkbox
+        id="terms"
+        checked={agreed}
+        onCheckedChange={(val) => setAgreed(!!val)}
+        className="mt-0.5"
+      />
+      <label
+        htmlFor="terms"
+        className="leading-snug cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+      >
+        By signing up, you agree to our{" "}
+        <Link href="#" className="underline underline-offset-4 hover:text-primary">
+          Terms of Service
+        </Link>{" "}
+        and{" "}
+        <Link href="#" className="underline underline-offset-4 hover:text-primary">
+          Privacy Policy
+        </Link>
+        .
+      </label>
+    </div>
 
-          <div className="text-center">
-            <Button
-              className="p-0"
-              variant="link"
-              onClick={() => setMode("login")}
-            >
-              Already have an account? Login
-            </Button>
-          </div>
-        </>
-      )}
+    <div className="text-center">
+      <Button
+        className="p-0"
+        variant="link"
+        onClick={() => setMode("login")}
+      >
+        Already have an account? Login
+      </Button>
+    </div>
+  </>
+)}
+
 
       {mode === "reset" && (
         <>
