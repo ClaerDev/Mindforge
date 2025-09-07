@@ -2,22 +2,20 @@
 
 Transform your photos with the power of AI! MindForge is your ultimate solution for creating/generating professional AI-generated photos, similar to the popular PhotoAI platform. Perfect for LinkedIn headshots, Instagram content, dating profile pictures, and professional portraits. Train AI model on your personal images and generate stunning, high-quality AI-generated photos within minutes.
 
-#### ⭐DO NOT FORGET TO STAR THIS REPO⭐
-
 ## 🚀 Key Features
 
-- 🛠️ Complete SaaS built in modern Next.js
-- 💻 Beautiful landing page included
-- 🤖 Train AI model on your personal images
-- 🖥️ Clean & intuitive event monitoring dashboard
-- 🎯 AI-Powered Professional Photo Generation
-- 🎨 Custom AI Model Training
-- 💼 Professional LinkedIn Headshots
-- 🌟 Clean, modern UI on top of shadcn-ui
-- 📱 Social Media Content Generation
-- 💳 Integrated Payment System
-- ✉️ Email Notifications
-- 📊 Usage Analytics
+- Complete SaaS built in modern Next.js
+- Beautiful landing page included
+- Train AI model on your personal images
+- Clean & intuitive event monitoring dashboard
+- AI-Powered Professional Photo Generation
+- Custom AI Model Training
+- Professional LinkedIn Headshots
+- Clean, modern UI on top of shadcn-ui
+- Social Media Content Generation
+- Integrated Payment System
+- Email Notifications
+- Usage Analytics
 
 ## Images of The AI App:
 
@@ -61,7 +59,7 @@ Before you begin, ensure you have:
 ### 1. Clone the Repository
 
 ```bash
-git clone [your-repo-url]
+git clone https://github.com/priyansh-narang2308/MindForge
 cd MindForge
 ```
 
@@ -83,7 +81,7 @@ Create a `.env.local` file in the root directory. Check `.env.example` for requi
 
 1. Create a new Supabase project
 2. Create a new storage bucket named `generated_images`
-3. Execute the SQL queries from `supabase-queries.md` in your Supabase SQL editor (You can also follow the tutorial video to setup the database)
+3. Execute the SQL queries from `QueriessSupabase.md` in your Supabase SQL editor.
 4. Set up the database triggers and functions
 5. Make sure to setup the right RLS policies (You can also follow the tutorial video to setup the RLS policies)
 
@@ -94,8 +92,6 @@ Visit these links to set up your AI models:
 - [Flux Dev LORA model trainer](https://replicate.com/ostris/flux-dev-lora-trainer/train)
 - [Flux Dev Model](https://replicate.com/black-forest-labs/flux-dev)
 - [Flux Schnell Model](https://replicate.com/black-forest-labs/flux-schnell)
-
-For stock images (not for training), I have used [Lummi AI](https://www.lummi.ai/)
 
 ### 6. Model Training Requirements
 
@@ -113,7 +109,7 @@ When training your custom model, ensure:
 
 ### 7. Stripe Setup
 
-Watch our detailed video tutorial for Stripe integration setup: [Stripe Setup Tutorial](https://www.youtube.com/watch?v=7AQNeii5K7E&t=27960s)
+I have used the template given by supabase for the table setup of stripe in supabase and for the functionalities used  [Stripe & Supabase SaaS Starter Kit](https://vercel.com/templates/next.js/stripe-supabase-saas-starter-kit), these are ready made templates.
 
 ### 8. Start Development Server
 
