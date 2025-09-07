@@ -39,7 +39,7 @@ const Billing = async () => {
           credits={credits}
         />
 
-        {subscription.status === "active" && (
+        {subscription?.status === "active" && (
           <Pricing
             subscription={subscription}
             user={user}
