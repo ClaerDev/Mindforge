@@ -24,7 +24,7 @@ interface RecentImageProps {
 const RecentImages = ({ images }: RecentImageProps) => {
   if (!images || images?.length === 0) {
     return (
-      <Card className="col-span-3 hover:border-muted-foreground/50 transition-colors">
+      <Card className="col-span-1 max-w-md mx-auto hover:border-muted-foreground/50 transition-colors">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-2xl font-semibold flex items-center gap-2">
             Recent Generations
