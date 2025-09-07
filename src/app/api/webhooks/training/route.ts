@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     }
 
     const userEmail = user.user.email ?? "";
-    const userName = user.user.user_metadata.full_name ?? "";
+    const userName = user.user.user_metadata.fullName ?? "";
 
     // ✅ Helper to send emails via Resend
     async function sendEmail(to: string, subject: string, htmlContent: string) {
