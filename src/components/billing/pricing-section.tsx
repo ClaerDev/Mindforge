@@ -223,15 +223,7 @@ const Pricing = ({
                   </span>
                 </div>
               )}
-              {product.name?.toLowerCase() ===
-                mostPopularProd.toLowerCase() && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-primary shadow-md">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-
+          
               <div className="flex-grow">
                 <div className="flex items-center justify-center">
                   <h2 className="text-xl font-bold text-foreground text-center">
